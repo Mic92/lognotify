@@ -8,7 +8,7 @@ changes in one of the predefined log files.
  luainotify (http://www3.telus.net/taj_khattra/luainotify.html)
 
 #SETUP
-* Make and install luanotify.
+* Make and install luainotify.
 * Download lognotify.lua and put in to your config directory. (~/.config/awesome)
   or in awesome's loadpath (/usr/share/awesome/lib)
 
