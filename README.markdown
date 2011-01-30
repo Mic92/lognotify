@@ -1,10 +1,12 @@
 #lognotify...
 ... is log watcher for awesome wm.
+
 It will show a naughty popup each time something 
 changes in one of the predefined log files.
 
 #REQUIREMENTS
  awesome for sure :) (http://awesome.naquadah.org/) 
+
  luainotify (http://www3.telus.net/taj_khattra/luainotify.html)
 
 #SETUP
@@ -16,11 +18,15 @@ changes in one of the predefined log files.
 
 #USAGE
 * Require the module in your rc.lua
-require("lognotify")
+
+`require("lognotify")`
 * Initialize and configure it. Here an example:
-``ilog = lognotify{ 
+``
+ilog = lognotify{
 	logs = { mpd = { file = "/home/bob/.mpd/log", },
 		aptitude = { file = "/var/log/aptitude", },
+		-- Check, wheter you have the permissions to read your log files!
+		-- You can fix this by configure syslog deamon in many case.
 		syslog    = { file = "/var/log/syslog", ignore = { "Changing fan level" },
 		},
 		awesome  = { file = "/home/bob/log/awesome",
@@ -34,8 +40,13 @@ require("lognotify")
 	interval = 1,
 	-- Time in seconds after which popup expires. Set 0 for no timeout. Default: 0
 	naughty_timeout = 15
-}``
+}
+``
 * run it:
-`ilog:start()`
+``
+ilog:start()
+``
 * if you tired of it, you can stop it and start later at any time again
-`ilog:stop()`
+``
+ilog:stop()
+``
