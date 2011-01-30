@@ -9,8 +9,10 @@ changes in one of the predefined log files.
 
 #SETUP
 * Make and install luainotify.
-* Download lognotify.lua and put in to your config directory. (~/.config/awesome)
-  or in awesome's loadpath (/usr/share/awesome/lib)
+* Clone lognotify in to your config directory. (~/.config/awesome):
+  `cd $XDG_CONFIG_HOME/awesome && git https://Mic92@github.com/Mic92/lognotify.git`
+  or rename init.lua to lognotify.lua and put into awesome's loadpath:
+  `wget --no-check-certificate https://github.com/Mic92/lognotify/blob/master/init.lua -O $XDG_CONFIG_HOME/awesome/lognotify.lua`
 
 #USAGE
 * Require the module in your rc.lua
