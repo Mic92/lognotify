@@ -25,11 +25,12 @@ changes in one of the predefined log files.
 `require("lognotify")`
 
 * Initialize and configure it. Here an example:
-<pre>
+
+``` lua
 ilog = lognotify{
    logs = { mpd = { file = "/home/bob/.mpd/log", },
    	aptitude = { file = "/var/log/aptitude", },
-   	-- Check, wheter you have the permissions to read your log files!
+   	-- Check, whether you have the permissions to read your log files!
    	-- You can fix this by configure syslog deamon in many case.
    	syslog    = { file = "/var/log/syslog", ignore = { "Changing fan level" },
    	},
@@ -45,7 +46,8 @@ ilog = lognotify{
    -- Time in seconds after which popup expires. Set 0 for no timeout. Default: 0
    naughty_timeout = 15
 }
-</pre>
+```
+
 * run it:
 
 `
