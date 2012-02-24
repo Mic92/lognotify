@@ -1,14 +1,14 @@
---  _                         _   _  __       
--- | |                       | | (_)/ _|      
--- | | ___   __ _ _ __   ___ | |_ _| |_ _   _ 
+--  _                         _   _  __
+-- | |                       | | (_)/ _|
+-- | | ___   __ _ _ __   ___ | |_ _| |_ _   _
 -- | |/ _ \ / _` | '_ \ / _ \| __| |  _| | | |
 -- | | (_) | (_| | | | | (_) | |_| | | | |_| |
 -- |_|\___/ \__, |_| |_|\___/ \__|_|_|  \__, |
 --           __/ |                       __/ |
---          |___/                       |___/ 
+--          |___/                       |___/
 --
 -- log watcher for awesome wm
--- show a naughty popup each time something 
+-- show a naughty popup each time something
 -- changes in one of the predefined log files.
 --
 -- based on work of koniu <gkusnierz <at> gmail.com>
@@ -20,7 +20,7 @@
 -- the extent permitted by applicable law. You can redistribute it
 -- and/or modify it under the terms of the Do What The Fuck You Want
 -- To Public License, Version 2, as published by Sam Hocevar. See
--- http://sam.zoy.org/wtfpl/COPYING for more details.  
+-- http://sam.zoy.org/wtfpl/COPYING for more details.
 
 -- {{{ Grab enviroment
 -- standart library
@@ -76,7 +76,7 @@ function LOGNOTIFY:watch()
     if events then
         for i, event in ipairs(events) do
             for logname, log in pairs(self.logs) do
-                if event.wd == log.wd then 
+                if event.wd == log.wd then
                     local diff = self:read_log(logname)
                     if diff then
                         self:notify(logname, log.file, diff)
@@ -92,7 +92,7 @@ function LOGNOTIFY:read_log(logname)
 
     -- read log file
     local f, errno = io.open(log.file)
-    if not f then 
+    if not f then
         print("[lognotify] Can't read: "..errno)
         return
     end
@@ -131,4 +131,4 @@ end
 
 
 setmetatable(_M, { __call = function(_, ...) return new(...) end })
--- vim:filetype=lua:tabstop=8:shiftwidth=4:expandtab:  
+-- vim:filetype=lua:tabstop=8:shiftwidth=4:expandtab:

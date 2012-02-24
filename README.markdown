@@ -1,11 +1,11 @@
 #lognotify...
 ... is log watcher for awesome wm.
 
-It will show a naughty popup each time something 
+It will show a naughty popup each time something
 changes in one of the predefined log files.
 
 #REQUIREMENTS
- [awesome](http://awesome.naquadah.org/) for sure :)  
+ [awesome](http://awesome.naquadah.org/) for sure :)
 
  [luainotify](http://www3.telus.net/taj_khattra/luainotify.html)
 
