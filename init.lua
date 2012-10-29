@@ -24,7 +24,7 @@
 
 -- {{{ Grab enviroment
 -- standart library
-local io = { open = io.open }
+local io = io and { open = io.open } or require("io")
 local ipairs = ipairs
 local pairs = pairs
 local print = print
@@ -33,8 +33,8 @@ local timer = timer
 local type = type
 -- external
 local inotify = require("inotify")
-local escape = awful.util.escape
-local naughty = naughty
+local escape = awful and awful.util.escape or require("awful.util").escape
+local naughty = naughty or require("naughty")
 -- }}}
 
 module("lognotify")
@@ -62,7 +62,11 @@ function LOGNOTIFY:start()
         self:read_log(logname)
         log.wd, errno, errstr = self.inotify:add_watch(log.file, { "IN_MODIFY" })
     end
-    self.timer:add_signal("timeout", function() self:watch() end)
+    if self.timer.add_signal then
+        self.timer:add_signal("timeout", function() self:watch() end)
+    else
+        self.timer:connect_signal("timeout", function() self:watch() end)
+    end
     self.timer:start()
 end
 
