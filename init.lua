@@ -32,6 +32,7 @@ local setmetatable = setmetatable
 local timer = timer
 local type = type
 -- external
+local socket = require("socket")
 local inotify = require("inotify")
 local escape = awful and awful.util.escape or require("awful.util").escape
 local naughty = naughty or require("naughty")
@@ -57,10 +58,11 @@ end
 
 function LOGNOTIFY:start()
     local errno, errstr
-    self.inotify, errno, errstr = inotify.init(true)
+    self.inotify, errno, errstr = inotify.init()
+    self.sd = { getfd = function () return self.inotify:fileno() end }
     for logname, log in pairs(self.logs) do
         self:read_log(logname)
-        log.wd, errno, errstr = self.inotify:add_watch(log.file, { "IN_MODIFY" })
+        log.wd, errno, errstr = self.inotify:addwatch(log.file, inotify.IN_MODIFY)
     end
     if self.timer.add_signal then
         self.timer:add_signal("timeout", function() self:watch() end)
@@ -76,14 +78,16 @@ function LOGNOTIFY:stop()
 end
 
 function LOGNOTIFY:watch()
-    local events, nread, errno, errstr = self.inotify:nbread()
-    if events then
-        for i, event in ipairs(events) do
-            for logname, log in pairs(self.logs) do
-                if event.wd == log.wd then
-                    local diff = self:read_log(logname)
-                    if diff then
-                        self:notify(logname, log.file, diff)
+    if #socket.select({self.sd}, nil, 0) > 0 then
+        local events, nread, errno, errstr = self.inotify:read()
+        if events then
+            for i, event in ipairs(events) do
+                for logname, log in pairs(self.logs) do
+                    if event.wd == log.wd then
+                        local diff = self:read_log(logname)
+                        if diff then
+                            self:notify(logname, log.file, diff)
+                        end
                     end
                 end
             end
