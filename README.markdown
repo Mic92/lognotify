@@ -7,13 +7,17 @@ changes in one of the predefined log files.
 #REQUIREMENTS
  [awesome](http://awesome.naquadah.org/) for sure :)
 
- [linotify](https://github.com/hoelzro/linotify) luarocks install inotify
+ [linotify](https://github.com/hoelzro/linotify)
 
- [luasocket](http://luasocket.luaforge.net/) luarocks install luasocket
+    $ luarocks install inotify
+
+ [luasocket](http://luasocket.luaforge.net/)
+
+    $ luarocks install luasocket
 
 #SETUP
 * Make and install luainotify.
-* Clone lognotify in to your config directory. (~/.config/awesome):
+* Clone lognotify into your configuration directory. (~/.config/awesome):
 
   `cd $XDG_CONFIG_HOME/awesome && git https://Mic92@github.com/Mic92/lognotify.git`
 
@@ -61,3 +65,8 @@ ilog:start()
 `
 ilog:stop()
 `
+
+#THANKS
+
+* [koniu](https://github.com/koniu) - original author of code
+* [dodo](https://github.com/dodo) - port to luarocks's inotify
