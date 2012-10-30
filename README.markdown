@@ -7,7 +7,9 @@ changes in one of the predefined log files.
 #REQUIREMENTS
  [awesome](http://awesome.naquadah.org/) for sure :)
 
- [luainotify](http://www3.telus.net/taj_khattra/luainotify.html)
+ [linotify](https://github.com/hoelzro/linotify) luarocks install inotify
+
+ [luasocket](http://luasocket.luaforge.net/) luarocks install luasocket
 
 #SETUP
 * Make and install luainotify.
