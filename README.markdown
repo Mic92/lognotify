@@ -19,7 +19,7 @@ changes in one of the predefined log files.
 * Make and install luainotify.
 * Clone lognotify into your configuration directory. (~/.config/awesome):
 
-  `cd $XDG_CONFIG_HOME/awesome && git https://Mic92@github.com/Mic92/lognotify.git`
+  `cd $XDG_CONFIG_HOME/awesome && git clone git://github.com/Mic92/lognotify.git`
 
   or rename init.lua to lognotify.lua and put into awesome's loadpath:
 
