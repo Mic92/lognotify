@@ -28,7 +28,7 @@ changes in one of the predefined log files.
 #USAGE
 * Require the module in your rc.lua
 
-`require("lognotify")`
+`local lognotify = require("lognotify")`
 
 * Initialize and configure it. Here an example:
 

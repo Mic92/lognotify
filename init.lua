@@ -14,7 +14,7 @@
 -- based on work of koniu <gkusnierz <at> gmail.com>
 -- (see https://awesome.naquadah.org/wiki/Naughty_log_watcher)
 --
--- Copyright (c) 2011, Jörg Thalheim <jthalheim@gmail.com>
+-- Copyright (c) 2011-2012, Jörg Thalheim <jthalheim@gmail.com>
 --
 -- This program is free software. It comes without any warranty, to
 -- the extent permitted by applicable law. You can redistribute it
@@ -38,12 +38,12 @@ local escape = awful and awful.util.escape or require("awful.util").escape
 local naughty = naughty or require("naughty")
 -- }}}
 
-module("lognotify")
+local lognotify = {}
 
 LOGNOTIFY = {}
 LOGNOTIFY_mt = { __index = LOGNOTIFY }
 
-function new(settings)
+function lognotify.new(settings)
     local watcher = {}
     if type(settings) ~= "table" then settings = {} end
 
@@ -138,5 +138,5 @@ function LOGNOTIFY:notify(name,file,diff)
 end
 
 
-setmetatable(_M, { __call = function(_, ...) return new(...) end })
+return setmetatable(lognotify, { __call = function(self, ...) return self.new(...) end })
 -- vim:filetype=lua:tabstop=8:shiftwidth=4:expandtab:
