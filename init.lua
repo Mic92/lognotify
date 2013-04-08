@@ -131,7 +131,7 @@ end
 
 function LOGNOTIFY:notify(name,file,diff)
     naughty.notify{
-        title = '<span color="white">'..name.."</span>: "..file,
+        title = name..": "..file,
         text = escape(diff),
         hover_timeout = 0.2, timeout = self.naughty_timeout
     }
