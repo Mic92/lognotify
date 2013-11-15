@@ -124,6 +124,7 @@ function LOGNOTIFY:read_log(logname)
     -- log was visited earlier
     if not log.len then
         log.len = f:seek("end")
+        f:close()
         return
     end
     f:seek("set", log.len)
