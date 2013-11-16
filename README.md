@@ -77,4 +77,4 @@ ilog:stop()
 #THANKS
 
 * [koniu](https://github.com/koniu) - original author of code
-* [dodo](https://github.com/dodo) - port to luarocks's inotify
+* [dodo](https://github.com/dodo) - port to luarocks's inotify and fixes related to logrotate
