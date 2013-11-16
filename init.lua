@@ -25,6 +25,7 @@
 -- {{{ Grab enviroment
 -- standart library
 local io = io and { open = io.open } or require("io")
+local bit = bit or require('bit')
 local ipairs = ipairs
 local pairs = pairs
 local print = print
@@ -62,7 +63,7 @@ function LOGNOTIFY:start()
     self.sd = { getfd = function () return self.inotify:fileno() end }
     for logname, log in pairs(self.logs) do
         self:read_log(logname)
-        log.wd, errno, errstr = self.inotify:addwatch(log.file, inotify.IN_MODIFY)
+        self:watch_log(logname)
     end
     if self.timer.add_signal then
         self.timer:add_signal("timeout", function() self:watch() end)
@@ -84,6 +85,9 @@ function LOGNOTIFY:watch()
             for i, event in ipairs(events) do
                 for logname, log in pairs(self.logs) do
                     if event.wd == log.wd then
+                        if bit.band(event.mask, inotify.IN_MOVE_SELF) ~= 0 then
+                            self:watch_log(logname)
+                        end
                         local diff = self:read_log(logname)
                         if diff then
                             self:notify(logname, log.file, diff)
@@ -93,6 +97,18 @@ function LOGNOTIFY:watch()
             end
         end
     end
+end
+
+function LOGNOTIFY:watch_log(logname)
+    local log = self.logs[logname]
+    if log.wd then
+        self.inotify:rmwatch(log.wd)
+    end
+    log.wd, errno, errstr = self.inotify:addwatch(log.file,
+                                                  inotify.IN_MODIFY,
+                                                  inotify.IN_MOVE_SELF)
+    log.len = nil
+    self:read_log(logname)
 end
 
 function LOGNOTIFY:read_log(logname)
@@ -108,6 +124,7 @@ function LOGNOTIFY:read_log(logname)
     -- log was visited earlier
     if not log.len then
         log.len = f:seek("end")
+        f:close()
         return
     end
     f:seek("set", log.len)
