@@ -14,6 +14,14 @@ changes in one of the predefined log files.
  [luasocket](http://luasocket.luaforge.net/)
 
     $ luarocks install luasocket
+    
+ [bitop](http://bitop.luajit.org/)
+
+    $ luarocks install luabitop
+
+One-Liner for archlinux:
+
+    $ yaourt -S lua-socket lua-bitop linotify-git
 
 #SETUP
 * Make and install luainotify.
