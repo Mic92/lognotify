@@ -30,7 +30,7 @@ local ipairs = ipairs
 local pairs = pairs
 local print = print
 local setmetatable = setmetatable
-local timer = timer
+local timer = (type(timer) == 'table' and timer or require("gears.timer"))
 local type = type
 -- external
 local socket = require("socket")
@@ -65,10 +65,10 @@ function LOGNOTIFY:start()
         self:read_log(logname)
         self:watch_log(logname)
     end
-    if self.timer.add_signal then
-        self.timer:add_signal("timeout", function() self:watch() end)
-    else
+    if self.timer.connect_signal then
         self.timer:connect_signal("timeout", function() self:watch() end)
+    else
+        self.timer:add_signal("timeout", function() self:watch() end)
     end
     self.timer:start()
 end
