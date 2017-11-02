@@ -25,7 +25,7 @@
 -- {{{ Grab enviroment
 -- standart library
 local io = io and { open = io.open } or require("io")
-local bit = bit or require('bit')
+local bit = bit32 or bit or require('bit')
 local ipairs = ipairs
 local pairs = pairs
 local print = print
